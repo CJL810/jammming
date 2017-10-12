@@ -1,5 +1,5 @@
 const clientId = 'cf0284bf7b6146fc8b69954f3846b9dc';
-const redirectUri = 'http://localhost:3000/';
+const redirectUri = 'http://easyjammming.surge.sh/';
 
 let accessToken;
 
@@ -29,7 +29,7 @@ const Spotify = {
     let endPointUrl = `https://api.spotify.com/v1/search?type=track&q=${term}`;
     return fetch(`${endPointUrl}${term}`, {
       headers: {
-        'Authorization': `Bearer ${accessToken}`
+        Authorization: `Bearer ${accessToken}`
       }
     }).then(response => {
       if (response.ok) {
@@ -51,8 +51,8 @@ const Spotify = {
   });
   },
 
-  savePlaylist(name, trackURIs) {
-    if (!name || !trackURIs) {
+  savePlaylist(name, trackUris) {
+    if (!name || !trackUris.length) {
       return;
     }
 
@@ -79,7 +79,7 @@ const Spotify = {
       fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
         headers:headers,
         method: 'POST',
-        body: JSON.stringify({uris: trackURIs})
+        body: JSON.stringify({uris: trackUris})
       });
     });
   });
